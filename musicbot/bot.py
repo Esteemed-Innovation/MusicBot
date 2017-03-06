@@ -382,6 +382,11 @@ class MusicBot(discord.Client):
         channel = entry.meta.get('channel', None)
         author = entry.meta.get('author', None)
 
+
+        self.autoplaylist.append(entry.url)
+        write_file(self.config.auto_playlist_file, self.autoplaylist)
+        print("[Info] Added %s to autoplaylist" % entry.url)
+
         if channel and author:
             last_np_msg = self.server_specific_data[channel.server]['last_np_msg']
             if last_np_msg and last_np_msg.channel == channel:
